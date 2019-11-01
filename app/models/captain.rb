@@ -13,4 +13,8 @@ def self.motorboat_operators
   includes(boats: :classifications).where(classifications: {name: "Motorboat"})
 end
 
+def self.talented_seafarers
+  where("id IN (?)", self.sailors.pluck(:id) & self.motorboat_operators.pluck(:id))
+end
+
 end
