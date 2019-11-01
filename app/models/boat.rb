@@ -23,4 +23,12 @@ def self.sailboats
   includes(:classifications).where(classifications: { name: 'Sailboat'})
 end
 
+def self.non_sailboats
+    where("id NOT IN (?)", self.sailboats.pluck(:id))
+end
+
+def self.longest
+    order('length DESC').first
+end
+
 end
